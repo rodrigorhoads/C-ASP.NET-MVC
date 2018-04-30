@@ -1,0 +1,45 @@
+﻿@model FilmesCinemasSessoes.Models.Sessao
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2>Detalhes</h2>
+
+<div>
+    <h4>Sessao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Cinema
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cinema.Nome)
+        </dd>
+
+        <dt>
+           Filme
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Filme.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Horario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Horario)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <button type="button" class="btn btn-warning">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button> |
+
+    <button type="button" class="btn btn-info"> @Html.ActionLink("Voltar", "Index")</button>
+
+</p>
+

@@ -1,0 +1,28 @@
+﻿@{
+    Layout="~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Cadastro de Filmes e Cinemas</h1>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div id="carousel"class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <a href="~/Filmes/Details/1"><img src="~/Content/img/avengers.jpg" alt="os vingadores" /></a>                </div>
+                <div class="item">
+                    <a href="~/Filmes/Details/2"> <img src="~/Content/img/logan.jpg" alt="logan" /></a></div>
+                <div class="item">
+                    <a href="~/Filmes/Details/3"><img src="~/Content/img/malvadofavorito.jpg" alt="Meu Malvado Favorito 3" /></a></div>
+            </div>
+            <a href="#carousel" data-slide="prev" class="left carousel-control"><span class="glyphicon glyphicon-chevron-left"></span></a>
+            <a href="#carousel" data-slide="next" class="right carousel-control"><span class="glyphicon glyphicon-chevron-right"></span></a>
+        </div>
+    </div>
+
+</div>
+

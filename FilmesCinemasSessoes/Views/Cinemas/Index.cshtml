@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<FilmesCinemasSessoes.Models.Cinema>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+
+    ViewBag.Title = "Cinemas";
+    
+    }
+
+<h2>Cinemas</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Novo", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Cinemas", FormMethod.Get))
+{
+    <div class="glyphicon-search">
+        Buscar Cinema: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+
+        <th>
+            Endereco:
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {<tr>
+            <td>
+                @Html.ActionLink(item.Nome, "PaginaCinemas", new { id = item.CinemaID })
+            </td>
+
+            <td>
+                @if (item.Endereco != null)
+                {
+                    @item.Endereco.Rua<p></p>
+  
+                    @item.Endereco.Numero
+                }
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn-xs btn-warning">
+                        @Html.ActionLink("Editar", "Edit", new
+                   {
+                       id = item.CinemaID
+                   })
+                    </button>
+                    <button type="button" class="btn-xs btn-success">
+                        @Html.ActionLink("Detalhes", "Details", new
+                   { id = item.CinemaID })
+                    </button>
+                    <button type="button" class="btn-xs btn-danger">
+                        @Html.ActionLink("Excluir", "Delete", new
+                   {
+                       id = item.CinemaID
+                   })
+                    </button>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, pagina => Url.Action("Index",
+    new { pagina, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

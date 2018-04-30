@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<FilmesCinemasSessoes.Models.Filmes>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = "Filmes";
+}
+
+<h2>Filmes</h2>
+
+<p>
+    @Html.ActionLink("Cadastrar Novo Filme", "Create")
+</p>
+@using (Html.BeginForm("Index", "Filmes", FormMethod.Get))
+{
+    <p class="glyphicon-search">
+        Buscar Filme: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Nome", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Genero", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+           Classificacao Indicativa
+        </th>
+        <th>
+          Duracao
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Nome, "PaginaFilmes", new { id = item.ID })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genero)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClassificacaoIndicativa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duracao)
+            </td>
+            <td>
+                <div class="btn-group">
+                    <button type="button" class="btn-xs btn-warning">
+                        @Html.ActionLink("Editar", "Edit", new
+               {
+                   id = item.ID
+               })
+                    </button>
+                    <button type="button" class="btn-xs btn-success">
+                        @Html.ActionLink("Detalhes", "Details", new
+               { id = item.ID })
+                    </button>
+                    <button type="button" class="btn-xs btn-danger">
+                        @Html.ActionLink("Excluir", "Delete", new
+               {
+                   id = item.ID
+               })
+                    </button>
+                </div>
+                </td>
+        </tr>
+    }
+
+</table>
+Pagina @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, pagina => Url.Action("Index",
+    new { pagina, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

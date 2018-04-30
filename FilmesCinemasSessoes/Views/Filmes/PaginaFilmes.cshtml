@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+@model IEnumerable<FilmesCinemasSessoes.Models.Sessao>
+@{
+    Layout = null;
+}
+
+@{
+    ViewBag.Title = "";
+}
+
+
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/bootstrap.css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">
+        @{ var conCinema = 0; }
+        @{ var idCinema = 0; }
+
+        <h2></h2>
+
+        <p>
+
+        </p>
+
+        <table class="table">
+
+
+
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @if (conCinema == 0)
+                {
+                        <td>
+                            <h1>@Html.DisplayFor(modelItem => item.Filme.Nome)</h1>
+                        </td>
+                        conCinema++;
+                    }
+                </tr>
+
+                <tr>
+                    <td>
+                        @if (item.Cinema.CinemaID != idCinema)
+                        {
+                            idCinema = item.Cinema.CinemaID;
+
+                            <h2>@Html.DisplayFor(modelItem => item.Cinema.Nome)</h2>
+                        }
+                        
+                            <div class="d-inline bg-danger">
+                                <strong>@Html.DisplayFor(modelItem => item.Horario)</strong>
+                         </div>
+               
+                    </td>
+             
+                </tr>
+            
+
+            }
+
+</table>
+    </div>
+    <div>
+        <button type="button" class="btn btn-info"> @Html.ActionLink("Voltar", "Index")</button>
+</div>
+</body>
+</html>
+
